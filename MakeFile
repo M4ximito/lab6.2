@@ -1,0 +1,23 @@
+hello: hello.o libjp.a libgr.so
+	gcc -o $@ $^
+
+hello.o: src/hello.c 
+	gcc -c $< -I./include
+
+libjp.a: pj.o pp.o
+	ar rs $@ $^
+
+libgr.so: pg.o pr.o
+	gcc -shared -o $@ $^
+
+pj.o: src/pj.c
+	gcc -c $< -I./include
+
+pp.o: src/pp.c
+	gcc -c $< -I./include
+
+pg.o: src/pg.c
+	gcc -c -fPIC $< -I./include
+
+pr.o: src/pr.c 
+	gcc -c -fPIC $< -I./include
